@@ -1,0 +1,117 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Tutor {
+  id         Int       @id @default(autoincrement())
+  nome       String    @db.VarChar(60)
+  email      String    @db.VarChar(60) @unique
+  senha      String    @db.VarChar(60)
+  cpf        String    @db.VarChar(11) @unique
+  celular    String?   @db.VarChar(11)  
+  endereco   String?   @db.VarChar(255) 
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  pets       Pet[]
+  consultas  Consulta[]
+  @@map("tutores")
+}
+
+model Veterinario {
+  id          Int       @id @default(autoincrement())
+  nome        String    @db.VarChar(60)
+  email       String    @db.VarChar(60) @unique
+  senha       String    @db.VarChar(60)
+  cnpj        String    @db.VarChar(14)
+  celular     String?   @db.VarChar(11)
+  endereco    String?   @db.VarChar(255)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  consultas   Consulta[]
+  prontuarios Prontuario[]
+  @@map("veterinarios")
+}
+
+model Consulta {
+  id             Int         @id @default(autoincrement())
+  data           DateTime    @db.DateTime
+  tutor          Tutor       @relation(fields: [tutorId], references: [id])
+  tutorId        Int        
+  veterinario    Veterinario @relation(fields: [veterinarioId], references: [id])
+  veterinarioId  Int         
+  pet            Pet         @relation(fields: [petId], references: [id])
+  petId          Int
+  prontuarios    Prontuario[]
+  status         Status      @default(AGUARDANDO)
+  descricao      String      @db.VarChar(255)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  @@map("consultas")
+}
+
+model Prontuario {
+  id            Int        @id @default(autoincrement())
+  descricao     String     @db.VarChar(255)
+  exame         String     @db.VarChar(255)
+  tratamento    String     @db.VarChar(255)
+  observacoes   String?    @db.VarChar(255)
+  consulta      Consulta   @relation(fields: [consultaId], references: [id]) // Link to Consulta
+  consultaId    Int
+  veterinario   Veterinario @relation(fields: [veterinarioId], references: [id])
+  veterinarioId  Int 
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  @@map("prontuarios")
+}
+
+
+
+
+model Pet {
+  id         Int      @id @default(autoincrement())
+  nome       String
+  dataNasc   String
+  tutor      Tutor    @relation(fields: [tutorId], references: [id])
+  tutorId    Int    
+  raca       Raca     @relation(fields: [racaId], references: [id])
+  racaId     Int
+  foto       String   @db.VarChar(400)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  consultas Consulta[]
+  @@map("pets")
+}
+
+model Raca {
+  id        Int      @id @default(autoincrement())
+  nome      String   
+  especie   Especie  @relation(fields: [especieId], references: [id])
+  especieId Int
+  pets      Pet[]
+  @@map("racas")
+}
+
+model Especie {
+  id      Int      @id @default(autoincrement())
+  nome    String   @unique
+  racas   Raca[]
+  @@map("especies")
+}
+
+enum Status {
+  AGUARDANDO
+  ACEITA
+  RECUSADA
+}
