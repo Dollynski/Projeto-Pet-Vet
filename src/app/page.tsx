@@ -2,51 +2,52 @@
 import { InputPesquisa } from "@/components/InputPesquisa"
 import { useEffect, useState } from "react";
 import { Toaster } from 'sonner'
-import { useClienteStore } from "@/context/cliente";
-import { ItemCarros } from "@/components/ItemCarros";
-import { CarroI } from "@/utils/types/carros";
+import { useVeterinarioStore } from "@/context/veterinario";
+import { ItemPets } from "@/components/ItemPets"; // Ensure this path is correct
+import { PetI } from "@/utils/types/pets";
+import { VeterinarioI } from "@/utils/types/veterinarios";
 import Link from "next/link";
 
 export default function Home() {
-  const [carros, setCarros] = useState<CarroI[]>([]);
-  const [cliente, setCliente] = useState<any>(null);
-  const { logaCliente } = useClienteStore()
+  const [pets, setPets] = useState<PetI[]>([]);
+  const [veterinario, setVeterinario] = useState<any>(null);
+  const { logaVeterinario } = useVeterinarioStore()
 
   useEffect(() => {
-    async function buscaCliente(idCliente: string) {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/clientes/${idCliente}`)
+    async function buscaVeterinario(idVeterinario: string) {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/veterinarios/${idVeterinario}`)
       if (response.status == 200) {
         const dados = await response.json()
-        logaCliente(dados)
-        setCliente(dados)
+        logaVeterinario(dados)
+        setVeterinario(dados)
       }
     }
 
     async function buscaDados() {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/carros`)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/pets`)
       const dados = await response.json()
-      setCarros(dados)
+      setPets(dados)
     }
     buscaDados()
 
     if (localStorage.getItem("client_key")) {
-      const idClienteLocal = localStorage.getItem("client_key") as string
-      buscaCliente(idClienteLocal)
+      const idVeterinarioLocal = localStorage.getItem("client_key") as string
+      buscaVeterinario(idVeterinarioLocal)
     }
   }, [])
 
-  const listaCarros = carros.map(carro => (
-    <ItemCarros data={carro} key={carro.id} />
+  const listaPets = pets.map(pet => (
+    <ItemPets data={pet} key={pet.id} />
   ))
 
   return (
     <main className="min-h-screen flex flex-col items-center bg-gray-100 w-[84%] ml-auto bg-[url('/pata.png')] bg-center bg-no-repeat bg-[length:64%]">
       <section className="text-center p-8 mt-24 ">
-        {cliente && cliente.id ? (
+        {veterinario && veterinario.id ? (
           <>
             <div className="max-w-screen-xl mx-auto">
               <h1 className="text-4xl font-bold mb-4 text-[#3F3F3F]">
-                Seja bem vindo, Dr. {cliente.nome}!
+                Seja bem vindo, Dr. {veterinario.nome}!
               </h1>
               <Toaster position="top-right" richColors />
             </div>

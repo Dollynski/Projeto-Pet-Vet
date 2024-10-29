@@ -1,42 +1,42 @@
 'use client'
 import { InputPesquisa } from "@/components/InputPesquisa"
-import { ItemCarros } from "@/components/ItemCarros";
-import { CarroI } from "@/utils/types/carros";
+import { ItemPets } from "@/components/ItemPets";
+import { PetI } from "@/utils/types/pets";
 import { useEffect, useState } from "react";
 import { Toaster } from 'sonner'
-import { useClienteStore } from "@/context/cliente";
+import { useVeterinarioStore } from "@/context/veterinario";
 import Link from 'next/link';
 
 export default function Home() {
-  const [carros, setCarros] = useState<CarroI[]>([])
-  const { logaCliente } = useClienteStore()
+  const [pets, setPets] = useState<PetI[]>([])
+  const { logaVeterinario } = useVeterinarioStore()
 
   useEffect(() => {
 
-    async function buscaCliente(idCliente: string) {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/clientes/${idCliente}`)
+    async function buscaVeterinario(idVeterinario: string) {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/veterinarios/${idVeterinario}`)
       if (response.status == 200) {
         const dados = await response.json()
-        logaCliente(dados)
+        logaVeterinario(dados)
       }
     }
 
     if (localStorage.getItem("client_key")) {
-      const idClienteLocal = localStorage.getItem("client_key") as string
-      buscaCliente(idClienteLocal)
+      const idVeterinarioLocal = localStorage.getItem("client_key") as string
+      buscaVeterinario(idVeterinarioLocal)
     }
 
     async function buscaDados() {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/carros`)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/pets`)
       const dados = await response.json()
       // console.log(dados)
-      setCarros(dados)
+      setPets(dados)
     }
     buscaDados()
   }, [])
 
-  const listaCarros = carros.map( carro => (
-    <ItemCarros data={carro} key={carro.id} />
+  const listaPets = pets.map( pet => (
+    <ItemPets data={pet} key={pet.id} />
   ))
 
   return (

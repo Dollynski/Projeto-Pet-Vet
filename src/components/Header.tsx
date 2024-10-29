@@ -1,15 +1,15 @@
 "use client"
 import Link from "next/link";
-import { useClienteStore } from "@/context/cliente";
+import { useVeterinarioStore } from "@/context/veterinario";
 import { useRouter } from "next/navigation";
 
 export function Header() {
-  const { cliente, deslogaCliente } = useClienteStore()
+  const { veterinario, deslogaVeterinario } = useVeterinarioStore()
   const router = useRouter()
 
-  function sairCliente() {
-    deslogaCliente()
-    // remove de localStorage o id do cliente logado (se ele indicou salvar no login)
+  function sairVeterinario() {
+    deslogaVeterinario()
+    // remove de localStorage o id do Veterinario logado (se ele indicou salvar no login)
     if (localStorage.getItem("client_key")) {
       localStorage.removeItem("client_key")
     }
@@ -29,7 +29,7 @@ export function Header() {
           </span>
         </Link>
         <div className="flex flex-col items-center space-y-6 rtl:space-y-reverse w-full">
-          {cliente.id ? (
+          {veterinario.id ? (
             <>
               <div className="header_buttons flex justify-center w-full flex-col items-center p-1 space-y-6 mt-auto mb-auto">
                 <Link
@@ -61,7 +61,7 @@ export function Header() {
                 </Link>
 
                 <Link
-                  href="/propostas"
+                  href="/relatorios"
                   className="font-bold text-white hover:underline text-sm w-5/6"
                 >
                   <button className="flex items-center space-x-2 bg-[#67AFB3] text-white px-4 py-2 rounded-md hover:bg-[#7dbabd] w-full">
@@ -135,9 +135,9 @@ export function Header() {
                     className="w-8 h-8 ml-1"
                   />
                   <div className="flex flex-col p-1">
-                    <span className="text-white">{cliente.nome}</span>
+                    <span className="text-white">{veterinario.nome}</span>
                     <span className="text-gray-300">
-                      {cliente.id.slice(0, 10)}
+                      {veterinario.id.toString().slice(0, 10)}
                     </span>
                   </div>
                 </div>
@@ -182,7 +182,7 @@ export function Header() {
                     <a
                       href="#"
                       className="text-blue-600 dark:text-blue-500 hover:underline block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      onClick={sairCliente}
+                      onClick={sairVeterinario}
                     >
                       Sair
                     </a>
@@ -192,9 +192,7 @@ export function Header() {
             </>
           ) : (
             <>
-              <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                <Link href="/login">Fazer Login</Link>
-              </button>
+            
             </>
           )}
         </div>

@@ -1,7 +1,7 @@
 "use client"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
-import { useClienteStore } from "@/context/cliente"
+import { useVeterinarioStore } from "@/context/veterinario"
 
 type Inputs = {
   email: string
@@ -11,26 +11,36 @@ type Inputs = {
 
 export default function Login() {
   const { register, handleSubmit } = useForm<Inputs>()
-  const { logaCliente } = useClienteStore()
+  const { logaVeterinario } = useVeterinarioStore()
   const router = useRouter()
 
   async function verificaLogin(data: Inputs) {
+
+    if (!process.env.NEXT_PUBLIC_URL_API) {
+      console.error("A variável de ambiente NEXT_PUBLIC_URL_API não está definida.")
+      return
+    }
+
     // console.log(data)
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/clientes/login`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/veterinarios/login`, {
       headers: {
         "Content-Type": "application/json"
       },
       method: "POST",
       body: JSON.stringify({ email: data.email, senha: data.senha })  
     })
+    if (!process.env.NEXT_PUBLIC_URL_API) {
+      console.error("A variável de ambiente NEXT_PUBLIC_URL_API não está definida.")
+      return
+    }
 //    console.log(response)
     if (response.status == 200) {
       const dados = await response.json()
       // console.log(dados)
 //      alert("Olá " + dados.nome)
 
-      // "coloca" os dados do cliente no contexto 
-      logaCliente(dados)
+      // "coloca" os dados do Veterinario no contexto 
+      logaVeterinario(dados)
 
       // se indicou que quer manter conectado, vamos salvar o id em localStorage
       if (data.manter) {
@@ -58,7 +68,7 @@ export default function Login() {
             <form className="space-y-4 md:space-y-6" 
               onSubmit={handleSubmit(verificaLogin)}>
               <div>
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail do Cliente:</label>
+                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail do Veterinario:</label>
                 <input type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" 
                   required 
                   {...register("email")} />
