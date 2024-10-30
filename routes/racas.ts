@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     const { nome, especieId } = req.body
 
     if (!nome || !especieId ) {
-        res.status(400).json({ "erro": "Informe o nome do pet, data de nascimento, ID do tutor e ID da raça" })
+        res.status(400).json({ "erro": "Informe o nome e a especieId" })
         return
     }
 

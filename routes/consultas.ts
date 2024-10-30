@@ -4,11 +4,14 @@ import { Router } from "express"
 const prisma = new PrismaClient()
 const router = Router()
 
+
 router.get("/", async (req, res) => {
     try {
         const consultas = await prisma.consulta.findMany({
             include: {
-                prontuarios: true
+                prontuarios: true,
+                tutor: true,
+                veterinario: true,
             }
         })
         res.status(200).json(consultas)
@@ -19,22 +22,30 @@ router.get("/", async (req, res) => {
 
 
 router.post("/", async (req, res) => {
-    const { data, tutorId, veterinarioId, petId, status, descricao } = req.body
+    const { data, tutorId, veterinarioId, petId, status, descricao } = req.body;
 
     if (!data || !tutorId || !veterinarioId || !petId || !descricao) {
-        res.status(400).json({ "erro": "Informe a data da consulta, o ID do tutor, ID do veterinário e ID do pet que será atendido" })
-        return
+        res.status(400).json({ "erro": "Informe a data da consulta, o ID do tutor, ID do veterinário e ID do pet que será atendido" });
+        return;
     }
 
     try {
         const consulta = await prisma.consulta.create({
-            data: { data, tutorId, veterinarioId, petId, status, descricao}
-        })
-        res.status(201).json(consulta)
+            data: {
+                data: new Date(data), // Ajuste para DateTime
+                tutorId: tutorId,
+                veterinarioId: veterinarioId,
+                petId: petId,
+                status: status || "AGUARDANDO", // Define o status padrão como "AGUARDANDO" caso não seja fornecido
+                descricao: descricao
+            }
+        });
+        res.status(201).json(consulta);
     } catch (error) {
-        res.status(400).json(error)
+        res.status(400).json({ error });
     }
-})
+});
+
 
 router.delete("/:id", async (req, res) => {
     const { id } = req.params

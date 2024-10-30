@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
     const { nome } = req.body
 
     if (!nome) {
-        res.status(400).json({ "erro": "Informe o nome do especie, data de nascimento, ID do tutor e ID da raça" })
+        res.status(400).json({ "erro": "Informe o nome da especie" })
         return
     }
 
