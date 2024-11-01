@@ -69,6 +69,9 @@ CREATE TABLE `pets` (
     `tutorId` INTEGER NOT NULL,
     `racaId` INTEGER NOT NULL,
     `foto` VARCHAR(400) NOT NULL,
+    `idade` INTEGER NOT NULL,
+    `peso` DOUBLE NOT NULL,
+    `sexo` ENUM('MACHO', 'FEMEA') NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 

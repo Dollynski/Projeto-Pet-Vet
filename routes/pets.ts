@@ -19,16 +19,16 @@ router.get("/", async (req, res) => {
 
 
 router.post("/", async (req, res) => {
-    const { nome, dataNasc, tutorId, racaId, foto } = req.body
+    const { nome, dataNasc, tutorId, racaId, foto, idade, peso, sexo } = req.body
 
-    if (!nome || !dataNasc || !tutorId || !racaId || !foto) {
+    if (!nome || !dataNasc || !tutorId || !racaId || !foto || !idade || !peso || !sexo) {
         res.status(400).json({ "erro": "Informe o nome do pet, data de nascimento, ID do tutor e ID da raça e a foto" })
         return
     }
 
     try {
         const pet = await prisma.pet.create({
-            data: { nome, dataNasc, tutorId, racaId, foto }
+            data: { nome, dataNasc, tutorId, racaId, foto, idade, peso, sexo }
         })
         res.status(201).json(pet)
     } catch (error) {
@@ -54,9 +54,9 @@ router.delete("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     const { id } = req.params
-    const { nome, dataNasc, tutorId, racaId, foto } = req.body
+    const { nome, dataNasc, tutorId, racaId, foto, idade, peso, sexo } = req.body
 
-    if (!nome || !dataNasc || !tutorId || !racaId || !foto) {
+    if (!nome || !dataNasc || !tutorId || !racaId || !foto || !idade || !peso || !sexo) {
         res.status(400).json({ "erro": "Informe o nome do pet, data de nascimento, ID do tutor e ID da raça" })
         return
     }
@@ -64,7 +64,7 @@ router.put("/:id", async (req, res) => {
     try {
         const pet = await prisma.pet.update({
             where: { id: Number(id) },
-            data: { nome, dataNasc, tutorId, racaId, foto }
+            data: { nome, dataNasc, tutorId, racaId, foto, idade, peso, sexo }
         })
         res.status(200).json(pet)
     } catch (error) {

@@ -88,6 +88,9 @@ model Pet {
   raca       Raca     @relation(fields: [racaId], references: [id])
   racaId     Int
   foto       String   @db.VarChar(400)
+  idade      Int
+  peso       Float
+  sexo       Sexo
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   consultas Consulta[]
@@ -114,4 +117,9 @@ enum Status {
   AGUARDANDO
   ACEITA
   RECUSADA
+}
+
+enum Sexo {
+  MACHO
+  FEMEA
 }
