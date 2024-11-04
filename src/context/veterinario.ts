@@ -12,7 +12,7 @@ export const useVeterinarioStore = create<VeterinarioStore>((set) => ({
   logaVeterinario: (veterinarioLogado) => set({ veterinario: veterinarioLogado }),
   deslogaVeterinario: () => set({ veterinario: {} as VeterinarioI }),
 
-  // cliente: {
+  // veterinario: {
   //   id: "dfsdsfdfsdfs",
   //   nome: "Luisa Farias",
   //   email: "luisa@fdssdf.cc"

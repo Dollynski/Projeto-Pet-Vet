@@ -1,19 +1,19 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { useVeterinarioStore } from "@/context/veterinario";
 import { useRouter } from "next/navigation";
 
 export function Header() {
-  const { veterinario, deslogaVeterinario } = useVeterinarioStore()
-  const router = useRouter()
+  const { veterinario, deslogaVeterinario } = useVeterinarioStore();
+  const router = useRouter();
 
   function sairVeterinario() {
-    deslogaVeterinario()
-    // remove de localStorage o id do Veterinario logado (se ele indicou salvar no login)
+    deslogaVeterinario();
+    // remove de localStorage o id do veterinario logado (se ele indicou salvar no login)
     if (localStorage.getItem("client_key")) {
-      localStorage.removeItem("client_key")
+      localStorage.removeItem("client_key");
     }
-    router.push("/login")
+    router.push("/login");
   }
 
   return (
@@ -47,7 +47,7 @@ export function Header() {
                 </Link>
 
                 <Link
-                  href="/propostas"
+                  href="/consultas"
                   className="font-bold text-white hover:underline text-sm w-5/6"
                 >
                   <button className="flex items-center space-x-2 bg-[#67AFB3] text-white px-4 py-2 rounded-md hover:bg-[#7dbabd] w-full">
@@ -137,7 +137,7 @@ export function Header() {
                   <div className="flex flex-col p-1">
                     <span className="text-white">{veterinario.nome}</span>
                     <span className="text-gray-300">
-                      {veterinario.id.toString().slice(0, 10)}
+                      Veterinário
                     </span>
                   </div>
                 </div>

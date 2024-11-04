@@ -1,29 +1,29 @@
 'use client'
 import { InputPesquisa } from "@/components/InputPesquisa"
-import { ItemPets } from "@/components/ItemPets";
+import { ItemPet } from "@/components/ItemPet";
 import { PetI } from "@/utils/types/pets";
 import { useEffect, useState } from "react";
 import { Toaster } from 'sonner'
-import { useClienteStore } from "@/context/cliente";
+import { useVeterinarioStore } from "@/context/veterinario";
 import Link from 'next/link';
 
 export default function Home() {
   const [pets, setPets] = useState<PetI[]>([])
-  const { logaCliente } = useClienteStore()
+  const { logaVeterinario } = useVeterinarioStore()
 
   useEffect(() => {
 
-    async function buscaCliente(idCliente: string) {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/clientes/${idCliente}`)
+    async function buscaVeterinario(idVeterinario: string) {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/veterinarios/${idVeterinario}`)
       if (response.status == 200) {
         const dados = await response.json()
-        logaCliente(dados)
+        logaVeterinario(dados)
       }
     }
 
     if (localStorage.getItem("client_key")) {
-      const idClienteLocal = localStorage.getItem("client_key") as string
-      buscaCliente(idClienteLocal)
+      const idVeterinarioLocal = localStorage.getItem("client_key") as string
+      buscaVeterinario(idVeterinarioLocal)
     }
 
     async function buscaDados() {
@@ -36,12 +36,13 @@ export default function Home() {
   }, [])
 
   const listaPets = pets.map( pet => (
-    <ItemPets data={pet} key={pet.id} />
+    <ItemPet data={pet} key={pet.id} />
   ))
 
   return (
     <main className="w-[84%] ml-auto">
 
+    <div className="items-center px-4 py-5 mt-24 sm:px-6">      
       <h1 className="text-5xl font-bold text-center mb-4">Enviar um Relatório</h1>
 
       <p className="text-2xl font-semibold text-center mb-4">Escolha o arquivo em PDF a ser enviado para o tutor de pet</p>
@@ -78,6 +79,7 @@ export default function Home() {
       <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Enviar dados</button>
     </div>
 
+    </div>
     </main>
   );
 }

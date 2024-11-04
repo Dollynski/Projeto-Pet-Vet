@@ -1,15 +1,14 @@
 'use client'
 import { InputPesquisa } from "@/components/InputPesquisa"
+import { ItemPet } from "@/components/ItemPet";
+import { PetI } from "@/utils/types/pets";
 import { useEffect, useState } from "react";
 import { Toaster } from 'sonner'
 import { useVeterinarioStore } from "@/context/veterinario";
-import { ItemPets } from "@/components/ItemPets"; // Ensure this path is correct
-import { PetI } from "@/utils/types/pets";
-import { VeterinarioI } from "@/utils/types/veterinarios";
 import Link from "next/link";
 
 export default function Home() {
-  const [pets, setPets] = useState<PetI[]>([]);
+  const [pets, setPets] = useState<PetI[]>([])
   const [veterinario, setVeterinario] = useState<any>(null);
   const { logaVeterinario } = useVeterinarioStore()
 
@@ -23,25 +22,25 @@ export default function Home() {
       }
     }
 
+    if (localStorage.getItem("client_key")) {
+      const idVeterinarioLocal = localStorage.getItem("client_key") as string
+      buscaVeterinario(idVeterinarioLocal)
+    }
+
     async function buscaDados() {
       const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/pets`)
       const dados = await response.json()
       setPets(dados)
     }
     buscaDados()
-
-    if (localStorage.getItem("client_key")) {
-      const idVeterinarioLocal = localStorage.getItem("client_key") as string
-      buscaVeterinario(idVeterinarioLocal)
-    }
   }, [])
 
   const listaPets = pets.map(pet => (
-    <ItemPets data={pet} key={pet.id} />
+    <ItemPet data={pet} key={pet.id} />
   ))
 
   return (
-    <main className="min-h-screen flex flex-col items-center bg-gray-100 w-[84%] ml-auto bg-[url('/pata.png')] bg-center bg-no-repeat bg-[length:64%]">
+    <main className="min-h-screen flex flex-col items-center bg-gray-100 w-[84%] ml-auto bg-[url('/pata.png')] bg-center bg-no-repeat bg-[length:56%]">
       <section className="text-center p-8 mt-24 ">
         {veterinario && veterinario.id ? (
           <>

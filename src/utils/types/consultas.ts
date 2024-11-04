@@ -3,7 +3,6 @@ import { TutorI } from "./tutores"
 import { VeterinarioI } from "./veterinarios"
 import { ProntuarioI } from "./prontuarios"
 
-
 export interface ConsultaI {
     id: string
     data: string
