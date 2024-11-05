@@ -57,7 +57,7 @@ export default function Consultas() {
         {consulta.petId} {/* Você pode precisar de uma chamada adicional para pegar as informações do pet, se necessário */}
       </th>
       <td className="px-6 py-4">
-        {consulta.tutor.nome} {/* Exibindo o nome do tutor */}
+        {consulta.status} {/* Exibindo o nome do tutor */}
       </td>
       <td className="px-6 py-4">
         {/* Se tiver foto do pet, você deve fazer uma nova chamada para obter as informações do pet se não estiver incluída */}
@@ -76,7 +76,7 @@ export default function Consultas() {
   ));
 
   return (
-    <section className="max-w-7xl w-[84%] ml-auto mx-auto">
+    <section className= "w-[84%] ml-auto">
       <h1 className="mb-6 mt-4 text-3xl font-extrabold leading-none tracking-tight text-black md:text-4xl lg:text-5xl dark:text-white">
         Listagem de <span className="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">Minhas consultas</span>
       </h1>

@@ -40,9 +40,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col items-center bg-gray-100 w-[84%] ml-auto bg-[url('/pata.png')] bg-center bg-no-repeat bg-[length:56%]">
-<h1>Jose amaral</h1>
+<h1>Luis Silva</h1>
         
-<button className="">
+<button className="p-2 bg-[#67AFB3] text-white rounded hover:bg-[#67BFB3]">
     <Link href="./pets">Ver pets</Link>
 </button>
 </main>
