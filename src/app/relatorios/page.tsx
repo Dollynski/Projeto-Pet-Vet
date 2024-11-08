@@ -69,12 +69,14 @@ export default function Home() {
       <label htmlFor="destinatario" className="block text-sm font-medium text-gray-700 dark:text-gray-200">Escolha o destinatário</label>
       <select id="destinatario" name="destinatario" className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
         <option>Selecione</option>
-        <option>Luis Silva</option>
+        <option>Dr. Fulano</option>
+        <option>Dr. Beltrano</option>
+        <option>Dr. Ciclano</option>
       </select>
     </div>
 
     <div className="flex justify-center mt-8">
-      <button className="px-4 py-2 bg-[#67AFB3] text-white rounded hover:bg-[#67BFB3]">Enviar dados</button>
+      <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Enviar dados</button>
     </div>
 
     </div>

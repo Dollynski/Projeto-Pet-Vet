@@ -163,7 +163,7 @@ export default function Home() {
   const [tutores, setTutores] = useState<{ id: string, nome: string }[]>([]);
 
   return (
-    <main className="w-[84%] ml-auto">
+    <main className="w-[84%] ml-auto bg-[url('/pata.png')] bg-center bg-no-repeat bg-[length:56%]">
       <div className="flex justify-between items-center px-4 py-5 sm:px-6">
         <Link href="/" className="text-gray-500 hover:text-gray-700 focus:outline-none focus:underline">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -181,7 +181,7 @@ export default function Home() {
       <InputPesquisa setPets={setPets} />
 
       <section className="max-w-screen-x ml-20">
-        <h1 className="mb-5 mt-2 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl">Pets <span className="underline underline-offset-3 decoration-8 decoration-[#67AFB3]">cadastrados</span></h1>
+        <h1 className="mb-5 mt-2 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl">Pets <span className="underline underline-offset-3 decoration-8 decoration-[#67AFB3]">em destaque</span></h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-14">
           {listaPets}
