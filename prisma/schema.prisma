@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -22,8 +22,8 @@ model Tutor {
   cpf        String    @db.VarChar(11) @unique
   celular    String?   @db.VarChar(11)  
   endereco   String?   @db.VarChar(255) 
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  createdAt  DateTime @default(now()) 
+  updatedAt  DateTime @updatedAt
   pets       Pet[]
   consultas  Consulta[]
   @@map("tutores")
@@ -37,8 +37,8 @@ model Veterinario {
   cnpj        String    @db.VarChar(14)
   celular     String?   @db.VarChar(11)
   endereco    String?   @db.VarChar(255)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   consultas   Consulta[]
   prontuarios Prontuario[]
   @@map("veterinarios")
@@ -46,7 +46,7 @@ model Veterinario {
 
 model Consulta {
   id             Int         @id @default(autoincrement())
-  data           DateTime    @db.DateTime
+  data           DateTime   @db.Date
   tutor          Tutor       @relation(fields: [tutorId], references: [id])
   tutorId        Int        
   veterinario    Veterinario @relation(fields: [veterinarioId], references: [id])
@@ -56,8 +56,8 @@ model Consulta {
   prontuarios    Prontuario[]
   status         Status      @default(AGUARDANDO)
   descricao      String      @db.VarChar(255)
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
   @@map("consultas")
 }
 
@@ -71,8 +71,8 @@ model Prontuario {
   consultaId    Int
   veterinario   Veterinario @relation(fields: [veterinarioId], references: [id])
   veterinarioId  Int 
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
   @@map("prontuarios")
 }
 
@@ -91,8 +91,8 @@ model Pet {
   idade      Int
   peso       Float
   sexo       Sexo
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt  DateTime@default(now())
+  updatedAt  DateTime@updatedAt
   consultas Consulta[]
   @@map("pets")
 }
