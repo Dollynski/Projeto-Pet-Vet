@@ -201,5 +201,21 @@ router.delete("/:id", async (req, res) => {
     res.status(400).json(error)
   }
 })
+router.get("/:id/pets", async (req, res) => {
+  const { id } = req.params
 
+  try {
+    const pets = await prisma.pet.findMany({
+      where: { tutorId: Number(id) }
+    })
+
+    if (pets.length === 0) {
+      res.status(400).json({ erro: "Nenhum pet encontrado para este tutor" })
+    } else {
+      res.status(200).json(pets)
+    }
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
 export default router
