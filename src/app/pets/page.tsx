@@ -11,6 +11,10 @@ import Swal from 'sweetalert2'
 export default function Home() {
   const [pets, setPets] = useState<PetI[]>([])
   const { logaVeterinario } = useVeterinarioStore()
+  
+  const [especies, setEspecies] = useState<{ id: string, nome: string }[]>([]);
+  const [racas, setRacas] = useState<{ id: string, nome: string }[]>([]);
+  const [tutores, setTutores] = useState<{ id: string, nome: string }[]>([]);
 
   useEffect(() => {
     async function buscaVeterinario(idVeterinario: string) {
@@ -34,6 +38,30 @@ export default function Home() {
     buscaDados()
   }, [])
 
+  useEffect(() => {
+    async function fetchEspecies() {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/especies`);
+      const dados = await response.json();
+      setEspecies(dados);
+    }
+
+    async function fetchRacas() {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/racas`);
+      const dados = await response.json();
+      setRacas(dados);
+    }
+
+    async function fetchTutores() {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/tutores`);
+      const dados = await response.json();
+      setTutores(dados);
+    }
+
+    fetchEspecies();
+    fetchRacas();
+    fetchTutores();
+  }, []);
+
   const listaPets = pets.map(pet => (
     <ItemPet data={pet} key={pet.id} />
   ))
@@ -47,8 +75,19 @@ export default function Home() {
     }
     buscaRacas();
   }, []);
+  
+    useEffect(() => {
+      async function buscaTutores() {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/tutores`);
+        const dados = await response.json();
+        setTutores(dados);
+      }
+      buscaTutores();
+    }, []);
+  
 
-  const [racas, setRacas] = useState<{ id: string, nome: string }[]>([]);
+
+
   const exibirFormularioCadastroPet = () => {
     Swal.fire({
       title: '<h2 style="color: #ffffff; font-size: 1.2rem;">Cadastrar Pet</h2>',
@@ -84,8 +123,13 @@ export default function Home() {
         
         <label style="color: #ffffff; font-size: 0.8rem;">Data de Nascimento</label>
         <input type="date" id="dataNasc" class="swal2-input" placeholder="Data de Nascimento" style="background-color: #333333; color: #ffffff; font-size: 0.8rem; padding: 5px; width: 100%; color-scheme: dark;">
-    
-                <label style="color: #ffffff; font-size: 0.8rem;">Raça</label>
+
+         <label style="color: #ffffff; font-size: 0.8rem;">Espécie do Pet</label>
+        <select id="sexo" class="swal2-input" style="background-color: #333333; color: #ffffff; font-size: 0.8rem; padding: 5px; width: 100%;">
+          ${especies.map(especie => `<option value="${especie.id}">${especie.nome}</option>`).join('')}
+        </select>
+
+         <label style="color: #ffffff; font-size: 0.8rem;">Raça</label>
         <select id="racaId" class="swal2-input" style="background-color: #333333; color: #ffffff; font-size: 0.8rem; padding: 5px; width: 100%;">
           ${racas.map(raca => `<option value="${raca.id}">${raca.nome}</option>`).join('')}
         </select>
@@ -151,17 +195,6 @@ export default function Home() {
     });
   };
 
-  useEffect(() => {
-    async function buscaTutores() {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/tutores`);
-      const dados = await response.json();
-      setTutores(dados);
-    }
-    buscaTutores();
-  }, []);
-
-  const [tutores, setTutores] = useState<{ id: string, nome: string }[]>([]);
-
   return (
     <main className="w-[84%] ml-auto bg-[url('/pata.png')] bg-center bg-no-repeat bg-[length:56%]">
       <div className="flex justify-between items-center px-4 py-5 sm:px-6">
@@ -181,7 +214,7 @@ export default function Home() {
       <InputPesquisa setPets={setPets} />
 
       <section className="max-w-screen-x ml-20">
-        <h1 className="mb-5 mt-2 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl">Pets <span className="underline underline-offset-3 decoration-8 decoration-[#67AFB3]">em destaque</span></h1>
+        <h1 className="mb-5 mt-2 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl">Pets <span className="underline underline-offset-3 decoration-8 decoration-[#67AFB3]">cadastrados</span></h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-14">
           {listaPets}
