@@ -49,11 +49,11 @@ export default function Login() {
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(verificaLogin)}>
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-50 dark:text-gray-900">E-mail do Veterinario:</label>
-                <input type="email" id="email" className="bg-gray-700 border border-gray-400 text-gray-50 rounded-lg focus:ring-[#67AFB3] focus:border-[#67AFB3] block w-full p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-[#67AFB3] dark:focus:border-[#67AFB3]" placeholder="seunome@endereco.com" required {...register("email")} />
+                <input type="email" id="email" className="bg-gray-700 border border-gray-400 text-gray-50 rounded-lg focus:ring-[#67AFB3] focus:border-[#67AFB3] block w-full p-2.5 dark:bg-gray-50 dark:border-gray-300 placeholder:placeholder-gray-400 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#67AFB3] dark:focus:border-[#67AFB3]" placeholder="seunome@endereco.com" required {...register("email")} />
               </div>
               <div>
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-50 dark:text-gray-900">Senha de Acesso:</label>
-                <input type="password" id="password" placeholder="••••••••" className="bg-gray-700 border border-gray-400 text-gray-50 rounded-lg focus:ring-[#67AFB3] focus:border-[#67AFB3] block w-full p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-900 dark:text-gray-900 dark:focus:ring-[#67AFB3] dark:focus:border-[#67AFB3]" required {...register("senha")} />
+                <input type="password" id="password" placeholder="••••••••" className="bg-gray-700 border border-gray-400 text-gray-50 rounded-lg focus:ring-[#67AFB3] focus:border-[#67AFB3] block w-full p-2.5 dark:bg-gray-50 dark:border-gray-300 placeholder:placeholder-gray-400 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#67AFB3] dark:focus:border-[#67AFB3]" required {...register("senha")} />
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-start">
