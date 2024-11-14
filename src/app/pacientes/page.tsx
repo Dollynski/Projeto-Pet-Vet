@@ -1,6 +1,8 @@
 'use client'
 import { ItemPet } from "@/components/ItemPet";
 import { PetI } from "@/utils/types/pets";
+import { ItemTutor } from "@/components/ItemTutor";
+import { TutorI } from "@/utils/types/tutores";
 import { useEffect, useState } from "react";
 import { toast } from 'sonner';
 import { useVeterinarioStore } from "@/context/veterinario";
@@ -9,6 +11,7 @@ import Swal from 'sweetalert2';
 
 export default function Home() {
   const [pets, setPets] = useState<PetI[]>([]);
+  const [tutores, setTutores] = useState<TutorI[]>([]);
   const { logaVeterinario } = useVeterinarioStore();
 
   useEffect(() => {
@@ -17,7 +20,17 @@ export default function Home() {
       buscarVeterinario(idVeterinarioLocal);
     }
     buscarDadosPets();
+    async function buscaTutores() {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/tutores`)
+      const dados = await response.json()
+      setTutores(dados)
+    }
+    buscaTutores();
   }, []);
+
+  const listaTutores = tutores.map(tutor => (
+    <ItemTutor data={tutor} key={tutor.id} />
+  ))
 
   async function buscarVeterinario(idVeterinario: string) {
     try {
@@ -178,6 +191,8 @@ export default function Home() {
         </div>
         <p className="text-sm text-center text-gray-500">Não achou o responsável? <span className="font-bold">Tente pelo e-mail ou telefone.</span></p>
       </div>
+
+      {listaTutores}
     </main>
   );
 }
