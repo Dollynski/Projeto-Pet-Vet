@@ -4,9 +4,9 @@ import { Header } from "@/components/Header";
 import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
-  title: "E-commerce Eletrônicos EcoShop",
-  description: "Sua loja online de notebooks, computadores e acessórios.",
-  keywords: ['e-commerce', 'notebooks', 'computadores', 'acessórios', 'produtos eletrônicos', 'tecnologia', 'pelotas', 'compras'],
+  title: "PetVet",
+  description: "A aplicação desenvolvida pensada em você, veterinário.",
+  keywords: ['veterinaria', 'veterinario', 'clinica', 'pets'],
 };
 
 export default function RootLayout({
