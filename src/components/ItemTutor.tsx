@@ -1,11 +1,15 @@
 import { TutorI } from "@/utils/types/tutores"
 import Link from "next/link"
 
+function formatCPF(cpf: string): string {
+  return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+}
+
 export function ItemTutor({ data }: { data: TutorI }) {
     return (
         <>
         
-<div id="accordion-collapse" data-accordion="collapse">
+<div className="flex flex-col justify-center m-auto w-[50%] mt-6" id="accordion-collapse" data-accordion="collapse">
   <h2 id="accordion-collapse-heading-1">
     <button onClick={() =>
                     document
@@ -20,11 +24,17 @@ export function ItemTutor({ data }: { data: TutorI }) {
   </h2>
   <div id={data.id} className="hidden" aria-labelledby="accordion-collapse-heading-1">
     <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-      <p className="mb-2 text-gray-500 dark:text-gray-400">Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.</p>
-      <p className="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="/docs/getting-started/introduction/" className="text-blue-600 dark:text-blue-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
+      <p className="mb-2 text-center text-gray-500 dark:text-gray-400">
+      <strong>Informações Adicionais</strong>
+      </p>
+      <p className="mb-2 text-gray-500 dark:text-gray-400">
+        <strong>Contato:</strong> {data.telefone ? `${data.telefone} | ${data.email}` : data.email}
+      </p>
+      <p className="text-gray-500 dark:text-gray-400"><strong>CPF:</strong> {formatCPF(data.cpf)}</p>
+      <p className="mb-2 text-gray-500 dark:text-gray-400"><strong>Endereço:</strong> {data.endereco}</p>
     </div>
   </div>
 </div>
 </>
-    );
+    );  
 }

@@ -122,7 +122,7 @@ export default function Home() {
         const endereco = (document.getElementById('endereco') as HTMLInputElement).value;
         const telefone = (document.getElementById('telefone') as HTMLInputElement).value;
   
-        if (!nome || !email || !senha || !cpf) {
+        if (!nome || !email || !senha || !cpf || !endereco) {
           Swal.showValidationMessage('Por favor, preencha todos os campos obrigatórios');
           return;
         }
@@ -192,6 +192,7 @@ export default function Home() {
         <p className="text-sm text-center text-gray-500">Não achou o responsável? <span className="font-bold">Tente pelo e-mail ou telefone.</span></p>
       </div>
 
+      <h2 className="text-3xl text-center mt-20">Lista de tutores cadastrados</h2>
       {listaTutores}
     </main>
   );
