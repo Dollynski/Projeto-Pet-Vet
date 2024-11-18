@@ -62,10 +62,10 @@ function validaSenha(senha: string) {
 }
 
 router.post("/", async (req, res) => {
-  const { nome, email, senha, cpf } = req.body
+  const { nome, email, senha, cpf, endereco, telefone } = req.body
 
-  if (!nome || !email || !senha || !cpf) {
-    res.status(400).json({ erro: "Informe nome, cpf, email e senha" })
+  if (!nome || !email || !senha || !cpf || !endereco) {
+    res.status(400).json({ erro: "Informe nome, cpf, email e senha e o endereço." })
     return
   }
 
