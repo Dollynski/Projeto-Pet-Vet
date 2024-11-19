@@ -105,8 +105,8 @@ export default function Home() {
           <label style="color: #ffffff; font-size: 0.8rem;">Endereço</label>
           <input type="text" id="endereco" class="swal2-input" placeholder="Endereço" style="background-color: #333333; color: #ffffff; font-size: 0.8rem; padding: 5px;">
   
-          <label style="color: #ffffff; font-size: 0.8rem;">Telefone</label>
-          <input type="text" id="telefone" class="swal2-input" placeholder="Telefone" style="background-color: #333333; color: #ffffff; font-size: 0.8rem; padding: 5px;">
+          <label style="color: #ffffff; font-size: 0.8rem;">Celular</label>
+          <input type="text" id="celular" class="swal2-input" placeholder="Celular" style="background-color: #333333; color: #ffffff; font-size: 0.8rem; padding: 5px;">
         </div>
       `,
       confirmButtonText: 'CADASTRAR',
@@ -120,14 +120,14 @@ export default function Home() {
         const senha = (document.getElementById('senha') as HTMLInputElement).value;
         const cpf = (document.getElementById('cpf') as HTMLInputElement).value;
         const endereco = (document.getElementById('endereco') as HTMLInputElement).value;
-        const telefone = (document.getElementById('telefone') as HTMLInputElement).value;
+        const celular = (document.getElementById('celular') as HTMLInputElement).value;
   
         if (!nome || !email || !senha || !cpf || !endereco) {
           Swal.showValidationMessage('Por favor, preencha todos os campos obrigatórios');
           return;
         }
   
-        return { nome, email, senha, cpf, endereco, telefone };
+        return { nome, email, senha, cpf, endereco, celular };
       }
     }).then((result) => {
       if (result.isConfirmed) {
@@ -138,7 +138,7 @@ export default function Home() {
   
 
   async function cadastrarResponsavel(dadosResponsavel: {
-    nome: string; email: string; senha: string; cpf: string; endereco: string; telefone: string;
+    nome: string; email: string; senha: string; cpf: string; endereco: string; celular: string;
   }) {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/tutores`, {
@@ -189,7 +189,7 @@ export default function Home() {
             </form>
           </div>
         </div>
-        <p className="text-sm text-center text-gray-500">Não achou o responsável? <span className="font-bold">Tente pelo e-mail ou telefone.</span></p>
+        <p className="text-sm text-center text-gray-500">Não achou o responsável? <span className="font-bold">Tente pelo e-mail ou celular.</span></p>
       </div>
 
       <h2 className="text-3xl text-center mt-20">Lista de tutores cadastrados</h2>

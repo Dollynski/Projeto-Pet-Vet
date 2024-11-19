@@ -5,6 +5,10 @@ function formatCPF(cpf: string): string {
   return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
 }
 
+function formatCelular(celular: string): string {
+  return celular.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+}
+
 export function ItemTutor({ data }: { data: TutorI }) {
     return (
         <>
@@ -28,10 +32,11 @@ export function ItemTutor({ data }: { data: TutorI }) {
       <strong>Informações Adicionais</strong>
       </p>
       <p className="mb-2 text-gray-500 dark:text-gray-400">
-        <strong>Contato:</strong> {data.telefone ? `${data.telefone} | ${data.email}` : data.email}
+        <strong>Contato:</strong> {data.celular ? `${formatCelular(data.celular)} | ${data.email}` : data.email}
       </p>
       <p className="text-gray-500 dark:text-gray-400"><strong>CPF:</strong> {formatCPF(data.cpf)}</p>
       <p className="mb-2 text-gray-500 dark:text-gray-400"><strong>Endereço:</strong> {data.endereco}</p>
+      <p className="text-gray-500 dark:text-gray-400"><strong>Cadastrado em:</strong> {new Date(data.createdAt).toLocaleDateString()}</p>
     </div>
   </div>
 </div>
