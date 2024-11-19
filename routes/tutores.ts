@@ -62,10 +62,10 @@ function validaSenha(senha: string) {
 }
 
 router.post("/", async (req, res) => {
-  const { nome, email, senha, cpf, endereco, telefone } = req.body
+  const { nome, email, senha, cpf, endereco, celular } = req.body
 
   if (!nome || !email || !senha || !cpf || !endereco) {
-    res.status(400).json({ erro: "Informe nome, cpf, email e senha e o endereço." })
+    res.status(400).json({ erro: "Informe nome, cpf, email, senha, endereco e seu celular, caso possua" })
     return
   }
 
@@ -75,16 +75,12 @@ router.post("/", async (req, res) => {
     return
   }
 
-  // 12 é o número de voltas (repetições) que o algoritmo faz
-  // para gerar o salt (sal/tempero)
   const salt = bcrypt.genSaltSync(12)
-  // gera o hash da senha acrescida do salt
   const hash = bcrypt.hashSync(senha, salt)
 
-  // para o campo senha, atribui o hash gerado
   try {
     const tutor = await prisma.tutor.create({
-      data: { nome, email, senha: hash, cpf }
+      data: { nome, email, senha: hash, cpf, endereco, celular }
     })
     res.status(201).json(tutor)
   } catch (error) {
