@@ -38,13 +38,27 @@ export function Header() {
                 >
                   <button className="flex items-center space-x-2 bg-[#67AFB3] text-white px-4 py-2 rounded-md hover:bg-[#7dbabd] w-full">
                     <img
-                      src="./pacientes.png"
+                      src="./tutor.png"
                       alt="Propostas"
                       className="w-7 h-7 bg-[#1B1B1B] rounded-lg p-0.5"
                     />
                     <span className="p-1">Pacientes</span>
                   </button>
                 </Link>
+
+                <Link
+                  href="/pets"
+                  className="font-bold text-white hover:underline text-sm w-5/6"
+                >
+                  <button className="flex items-center space-x-2 bg-[#67AFB3] text-white px-4 py-2 rounded-md hover:bg-[#7dbabd] w-full">
+                    <img
+                      src="./pacientes.png"
+                      alt="Propostas"
+                      className="w-7 h-7 bg-[#1B1B1B] rounded-lg p-0.5"
+                    />
+                    <span className="p-1">Pets</span>
+                  </button>
+                </Link>                
 
                 <Link
                   href="/consultas"

@@ -67,6 +67,7 @@ export default function Home() {
   ))
 
   // Função para exibir o formulário de cadastro de pet com SweetAlert2
+  
   useEffect(() => {
     async function buscaRacas() {
       const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/racas`);
@@ -196,7 +197,7 @@ export default function Home() {
   };
 
   return (
-    <main className="w-[84%] ml-auto bg-[url('/pata.png')] bg-center bg-no-repeat bg-[length:56%]">
+    <main className="w-[84%] ml-auto">
       <div className="flex justify-between items-center px-4 py-5 sm:px-6">
         <Link href="/" className="text-gray-500 hover:text-gray-700 focus:outline-none focus:underline">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

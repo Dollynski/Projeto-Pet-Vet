@@ -73,7 +73,7 @@ export default function Home() {
       const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/tutores?nome=${nome}`);
       const dados = await response.json();
       if (response.ok && dados.length > 0) {
-        window.location.href = './tutores';
+        window.location.href = '';
       } else {
         toast.error('Tutor não encontrado');
       }
@@ -107,6 +107,8 @@ export default function Home() {
   
           <label style="color: #ffffff; font-size: 0.8rem;">Celular</label>
           <input type="text" id="celular" class="swal2-input" placeholder="Celular" style="background-color: #333333; color: #ffffff; font-size: 0.8rem; padding: 5px;">
+
+          <h4 style="color: #bbbbbb; font-size: 0.6rem; margin-top: 12px;">*Favor, desconsiderar pontuação e caracteres especiais nos campos: CPF e CELULAR.</h4>
         </div>
       `,
       confirmButtonText: 'CADASTRAR',
@@ -126,6 +128,17 @@ export default function Home() {
           Swal.showValidationMessage('Por favor, preencha todos os campos obrigatórios');
           return;
         }
+
+        if (cpf.length !== 11) {
+          Swal.showValidationMessage('O CPF deve conter 11 dígitos');
+          return;
+        }
+
+        if (celular.length !== 11) {
+          Swal.showValidationMessage('O celular deve conter 11 dígitos');
+          return;
+        }
+
   
         return { nome, email, senha, cpf, endereco, celular };
       }
@@ -153,10 +166,10 @@ export default function Home() {
         icon: 'success',
         title: '<h2 style="color: #ffffff; font-size: 1.2rem;">Sucesso</h2>',
         text: 'Responsável cadastrado com sucesso!',
-        confirmButtonColor: '#A4D0C3',
-        background: '#1F1F1F',
-        padding: '15px',
-        width: '500px',
+        confirmButtonColor: "#A4D0C3",
+        background: "#1F1F1F",
+        padding: "15px",
+        width: "500px",
       });
     } catch {
       showError('Não foi possível cadastrar o responsável. Tente novamente.');
