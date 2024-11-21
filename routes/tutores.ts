@@ -184,6 +184,36 @@ router.put("/:id", async (req, res) => {
   }
 })
 
+router.patch("/:id", async (req, res) => {
+  const { id } = req.params
+  const { nome, email, senha, cpf, endereco, celular } = req.body
+
+  const data: any = {}
+  if (nome) data.nome = nome
+  if (email) data.email = email
+  if (senha) {
+    const salt = bcrypt.genSaltSync(12)
+    data.senha = bcrypt.hashSync(senha, salt)
+  }
+  if (cpf) data.cpf = cpf
+  if (endereco) data.endereco = endereco
+  if (celular) data.celular = celular
+
+  if (Object.keys(data).length === 0) {
+    res.status(400).json({ erro: "Informe ao menos um campo para atualizar" })
+    return
+  }
+
+  try {
+    const tutor = await prisma.tutor.update({
+      where: { id: Number(id) },
+      data
+    })
+    res.status(200).json(tutor)
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params
