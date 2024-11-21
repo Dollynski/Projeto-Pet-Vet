@@ -178,35 +178,40 @@ export function ItemTutor({ data }: { data: TutorI }) {
         id="accordion-collapse"
         data-accordion="collapse"
       >
+
         <h2 id="accordion-collapse-heading-1">
-          <button
-            onClick={() =>
-              document.getElementById(data.id)?.classList.toggle("hidden")
-            }
-            type="button"
-            className="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-1 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
-            data-accordion-target="#accordion-collapse-body-1"
-            aria-expanded="true"
-            aria-controls="accordion-collapse-body-1"
-          >
-            <span>{data.nome}</span>
-            <svg
-              data-accordion-icon
-              className="w-3 h-3 rotate-180 shrink-0"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 10 6"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 5 5 1 1 5"
-              />
-            </svg>
-          </button>
+<button
+  onClick={() =>
+    document.getElementById(data.id)?.classList.toggle("hidden")
+  }
+  type="button"
+  className="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-1 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3 relative"
+  data-accordion-target="#accordion-collapse-body-1"
+  aria-expanded="true"
+  aria-controls="accordion-collapse-body-1"
+>
+  <div className="ml-4">
+  <span className="before:absolute before:left-0 before:top-0 before:bottom-0 before:w-2 before:bg-[#67AFB3] before:rounded-l-lg before:rounded-b-none"></span>
+  <span>{data.nome}</span>
+
+  </div>
+  <svg
+    data-accordion-icon
+    className="w-3 h-3 rotate-180 shrink-0"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 10 6"
+  >
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M9 5 5 1 1 5"
+    />
+  </svg>
+</button>
         </h2>
         <div
           id={data.id}
