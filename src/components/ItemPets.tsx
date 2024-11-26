@@ -16,7 +16,7 @@ export function ItemPets({ data }: { data: PetI }) {
           {data.tutor.nome} - {data.nome}
         </h5>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Ano: {data.dataNasc} - Raça: {data.raca}
+          Ano: {data.dataNasc} - Raça: {data.raca.nome}
         </p>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-400 truncate">
           {data.consultas.map((consulta) => consulta.id).join(', ')}
