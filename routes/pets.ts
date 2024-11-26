@@ -79,6 +79,42 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+router.patch("/:id", async (req, res) => {
+    const { id } = req.params
+    const { nome, dataNasc, tutorId, racaId, foto, peso, idade, sexo } = req.body
+  
+    const data: any = {}
+    if (nome) data.nome = nome
+    if (dataNasc) data.dataNasc = dataNasc
+    if (tutorId) data.tutorId = tutorId
+    if (racaId) data.racaId = racaId
+    if (foto) data.foto = foto
+    if (peso) data.peso = peso
+    if (idade) data.idade = idade 
+    if (sexo) data.sexo = sexo
+
+    if (Object.keys(data).length === 0) {
+      res.status(400).json({ erro: "Informe ao menos um campo para atualizar" })
+      return
+    }
+  
+    try {
+      const pet = await prisma.pet.update({
+        where: { id: Number(id) },
+        data
+      })
+      res.status(200).json(pet)
+    } catch (error) {
+      res.status(400).json(error)
+    }
+  })
+
+
+
+
+
+
+
 // Rota para obter um pet específico
 router.get("/:id", async (req, res) => {
     const { id } = req.params;
