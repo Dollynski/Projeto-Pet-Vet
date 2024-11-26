@@ -89,7 +89,7 @@ export function Header() {
                 </Link>
 
                 <Link
-                  href="/pacientes"
+                  href=""
                   className="font-bold text-white hover:underline text-sm w-5/6"
                 >
                   <button className="flex items-center space-x-2 dark:bg-gray-900 text-white px-4 py-2 rounded-md w-full">
@@ -98,7 +98,7 @@ export function Header() {
                 </Link>
 
                 <Link
-                  href="/pacientes"
+                  href=""
                   className="font-bold text-white hover:underline text-sm w-5/6"
                 >
                   <button className="flex items-center space-x-2 dark:bg-gray-900 text-white px-4 py-2 rounded-md w-full">
@@ -107,7 +107,7 @@ export function Header() {
                 </Link>
 
                 <Link
-                  href="/pacientes"
+                  href=""
                   className="font-bold text-white hover:underline text-sm w-5/6"
                 >
                   <button className="flex items-center space-x-2 dark:bg-gray-900 text-white px-4 py-2 rounded-md w-full">
@@ -116,7 +116,7 @@ export function Header() {
                 </Link>
 
                 <Link
-                  href="/pacientes"
+                  href=""
                   className="font-bold text-white hover:underline text-sm w-5/6"
                 >
                   <button className="flex items-center space-x-2 dark:bg-gray-900 text-white px-4 py-2 rounded-md w-full">
@@ -124,7 +124,7 @@ export function Header() {
                 </Link>
 
                 <Link
-                  href="/pacientes"
+                  href=""
                   className="font-bold text-white hover:underline text-sm w-5/6"
                 >
                   <button className="flex items-center space-x-2 dark:bg-gray-900 text-white px-4 py-2 rounded-md w-full">
@@ -132,7 +132,7 @@ export function Header() {
                 </Link>
 
                 <Link
-                  href="/pacientes"
+                  href=""
                   className="font-bold text-white hover:underline text-sm w-5/6"
                 >
                   <button className="flex items-center space-x-2 dark:bg-gray-900 text-white px-4 py-2 rounded-md w-full">
