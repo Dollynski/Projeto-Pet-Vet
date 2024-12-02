@@ -134,4 +134,55 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+router.get("/pesquisa/:termo", async (req, res) => {
+    const { termo } = req.params
+  
+    // tenta converter o termo em número
+    const termoNumero = Number(termo)
+  
+    // se a conversão gerou um NaN (Not a Number)
+    if (isNaN(termoNumero)) {
+      try {
+        const pets = await prisma.pet.findMany({
+          include: {
+            tutor: true,
+            consultas: true,
+            raca:true,
+
+          },
+          where: {
+            OR: [
+              { nome: { contains: termo }},
+              { raca: { nome: termo}},
+              { tutor: { nome: termo }}
+            ]
+          }
+        })
+        res.status(200).json(pets)
+      } catch (error) {
+        res.status(400).json(error)
+      }
+    } else {
+      try {
+        const pets = await prisma.pet.findMany({
+          include: {
+            tutor: true,
+            consultas: true,
+            raca: true
+          },
+          where: {
+            OR: [
+              { peso: { lte: termoNumero }},
+              { idade: termoNumero }
+            ]
+          }
+        })
+        res.status(200).json(pets)
+      } catch (error) {
+        res.status(400).json(error)
+      }
+    }
+  })
+
+
 export default router;
