@@ -13,10 +13,6 @@ type Inputs = {
   termo: string
 }
 
-type InputPesquisaProps = {
-  setPets: React.Dispatch<React.SetStateAction<TutorI[]>>
-}
-
 
 export default function Home() {
   const [tutores, setTutores] = useState<TutorI[]>([]);
