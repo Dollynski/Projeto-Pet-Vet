@@ -1,19 +1,8 @@
-import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { TutorI } from "@/utils/types/tutores";
-import Link from "next/link";
 
 export function ItemTutor({ data }: { data: TutorI }) {
-  const [racas, setRacas] = useState([]);
 
-  useEffect(() => {
-    async function buscaRacas() {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/racas`);
-      const dados = await response.json();
-      setRacas(dados);
-    }
-    buscaRacas();
-  }, []);
 
   async function deletarTutor(id: string) {
     const result = await Swal.fire({
