@@ -239,7 +239,7 @@ const exibirFormularioCadastroConsulta = () => {
               <td className="px-6 py-4">{consulta.tutor ? consulta.tutor.nome : 'Nome do tutor não disponível'}</td>
               <td className="px-6 py-4">
                 <p>{dataDMA(consulta.data)}</p>
-                <p><i>Horário: {new Date(consulta.data).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</i></p>
+                <p><i>Horário: {new Date(consulta.data).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo' })}</i></p>
               </td>
               <td className="px-6 py-4">
               <img src={consulta.pet?.foto || 'foto_default.jpg'} alt="Foto do Pet" className="w-10 h-10 rounded-full" />
