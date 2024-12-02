@@ -215,7 +215,7 @@ const exibirFormularioCadastroConsulta = () => {
         </button>
       </div>
       </div>
-      <h1 className="flex justify-center align-center mb-6 mt-4 text-3xl font-extrabold leading-none tracking-tight text-black md:text-4xl lg:text-5xl dark:text-white">
+      <h1 className="flex justify-center align-center mb-6 mt-4 text-3xl font-extrabold leading-none tracking-tight text-black md:text-4xl lg:text-5xl dark:text-black">
       <span className="underline underline-offset-3 decoration-8 decoration-[#67AFB3] dark:decoration-[#67AFB3]"> Minhas consultas pendentes</span>
       </h1>
 
