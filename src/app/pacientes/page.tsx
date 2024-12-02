@@ -1,25 +1,33 @@
 'use client'
-import { ItemPet } from "@/components/ItemPet";
-import { PetI } from "@/utils/types/pets";
 import { ItemTutor } from "@/components/ItemTutor";
 import { TutorI } from "@/utils/types/tutores";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form"
 import { toast } from 'sonner';
 import { useVeterinarioStore } from "@/context/veterinario";
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 
+
+type Inputs = {
+  termo: string
+}
+
+type InputPesquisaProps = {
+  setPets: React.Dispatch<React.SetStateAction<TutorI[]>>
+}
+
+
 export default function Home() {
-  const [pets, setPets] = useState<PetI[]>([]);
   const [tutores, setTutores] = useState<TutorI[]>([]);
   const { logaVeterinario } = useVeterinarioStore();
+  const { register, handleSubmit, reset } = useForm<Inputs>()
 
   useEffect(() => {
     const idVeterinarioLocal = localStorage.getItem("client_key") as string;
     if (idVeterinarioLocal) {
       buscarVeterinario(idVeterinarioLocal);
     }
-    buscarDadosPets();
     async function buscaTutores() {
       const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/tutores`)
       const dados = await response.json()
@@ -31,6 +39,9 @@ export default function Home() {
   const listaTutores = tutores.map(tutor => (
     <ItemTutor data={tutor} key={tutor.id} />
   ))
+
+
+
 
   async function buscarVeterinario(idVeterinario: string) {
     try {
@@ -44,16 +55,6 @@ export default function Home() {
     }
   }
 
-  async function buscarDadosPets() {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/pets`);
-      const dados = await response.json();
-      setPets(dados);
-    } catch {
-      showError('Erro ao carregar lista de pets');
-    }
-  }
-
   function showError(message: string) {
     Swal.fire({
       icon: 'error',
@@ -62,25 +63,22 @@ export default function Home() {
     });
   }
 
-  function handleBuscaTutor(event: React.FormEvent) {
-    event.preventDefault();
-    const searchValue = (document.getElementById('search') as HTMLInputElement).value;
-    buscaTutor(searchValue);
+
+  async function enviaPesquisa(data: Inputs) {
+    if (data.termo.length < 2) {
+      toast.warning("Digite, no mínimo, 2 caracteres para realizar a pesquisa")
+      return
+    }
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/tutores/pesquisa/${data.termo}`)
+    const dados = await response.json()
+    if (dados.length == 0) {
+      toast.error("Nenhum pet encontrado com o termo pesquisado")
+      reset({ termo: "" })
+      return
+    }
+    setTutores(dados)
   }
 
-  async function buscaTutor(nome: string) {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/tutores?nome=${nome}`);
-      const dados = await response.json();
-      if (response.ok && dados.length > 0) {
-        window.location.href = '';
-      } else {
-        toast.error('Tutor não encontrado');
-      }
-    } catch {
-      toast.error('Erro ao buscar tutor');
-    }
-  }
 
   function exibirFormularioCadastroTutor() {
     Swal.fire({
@@ -197,8 +195,8 @@ export default function Home() {
         <h1 className="text-5xl font-bold text-center mb-4">Localizar Dono de Pets</h1>
         <div className="flex items-center mb-4 justify-center mt-28">
           <div className="relative w-1/2">
-            <form onSubmit={handleBuscaTutor}>
-              <input type="search" id="search" className="block p-4 pl-12 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Digite aqui o nome do Tutor/Tutora do Pet" />
+            <form onSubmit={handleSubmit(enviaPesquisa)}>
+              <input type="search" id="search" className="block p-4 pl-12 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Digite aqui o nome do Tutor/Tutora do Pet" required {...register("termo")}/>
             </form>
           </div>
         </div>
