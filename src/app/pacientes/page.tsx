@@ -68,7 +68,7 @@ export default function Home() {
     const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/tutores/pesquisa/${data.termo}`)
     const dados = await response.json()
     if (dados.length == 0) {
-      toast.error("Nenhum pet encontrado com o termo pesquisado")
+      toast.error("Nenhum tutor encontrado com o termo pesquisado")
       reset({ termo: "" })
       return
     }
