@@ -244,4 +244,32 @@ router.get("/:id/pets", async (req, res) => {
     res.status(400).json(error)
   }
 })
+
+router.get("/pesquisa/:nome", async (req, res) => {
+  const { nome } = req.params
+
+  try {
+    const tutores = await prisma.tutor.findMany({
+      where: {
+        nome: {
+          contains: nome,
+          mode: 'insensitive'
+        }
+      },
+      include: {
+        pets: true,
+        consultas: true
+      }
+    })
+
+    if (tutores.length === 0) {
+      res.status(404).json({ erro: "Nenhum tutor encontrado com esse nome" })
+    } else {
+      res.status(200).json(tutores)
+    }
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+
 export default router
