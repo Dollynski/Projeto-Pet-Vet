@@ -170,6 +170,12 @@ export default function Home() {
     }
   }
 
+  async function mostraTodosTutores() {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/tutores`)
+    const dados = await response.json()
+    setTutores(dados)
+  }
+
   return (
     <main className="w-[84%] ml-auto">
       <div className="flex justify-between items-center px-4 py-5 sm:px-6">
@@ -194,6 +200,15 @@ export default function Home() {
             <form onSubmit={handleSubmit(enviaPesquisa)}>
               <input type="search" id="search" className="block p-4 pl-12 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Digite aqui o nome do Tutor/Tutora do Pet" required {...register("termo")}/>
             </form>
+            <div className="flex justify-center mt-4">
+              <button
+              type="button"
+              className="focus:outline-none text-white bg-[#67AFB3] hover:bg-[#7dbabd] focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+              onClick={mostraTodosTutores}
+              >
+              Ver Todos os Tutores
+              </button>
+            </div>
           </div>
         </div>
         <p className="text-sm text-center text-gray-500">Não achou o responsável? <span className="font-bold">Tente pelo e-mail ou celular.</span></p>
