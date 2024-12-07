@@ -125,11 +125,6 @@ export default function Home() {
         <label style="color: #ffffff; font-size: 0.8rem;">Data de Nascimento</label>
         <input type="date" id="dataNasc" class="swal2-input" placeholder="Data de Nascimento" style="background-color: #333333; color: #ffffff; font-size: 0.8rem; padding: 5px; width: 100%; color-scheme: dark;">
 
-         <label style="color: #ffffff; font-size: 0.8rem;">Espécie do Pet</label>
-        <select id="sexo" class="swal2-input" style="background-color: #333333; color: #ffffff; font-size: 0.8rem; padding: 5px; width: 100%;">
-          ${especies.map(especie => `<option value="${especie.id}">${especie.nome}</option>`).join('')}
-        </select>
-
          <label style="color: #ffffff; font-size: 0.8rem;">Raça</label>
         <select id="racaId" class="swal2-input" style="background-color: #333333; color: #ffffff; font-size: 0.8rem; padding: 5px; width: 100%;">
           ${racas.map(raca => `<option value="${raca.id}">${raca.nome}</option>`).join('')}
