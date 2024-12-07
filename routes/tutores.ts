@@ -245,31 +245,28 @@ router.get("/:id/pets", async (req, res) => {
   }
 })
 
-router.get("/pesquisa/:nome", async (req, res) => {
-  const { nome } = req.params
+router.get("/pesquisa/:termo", async (req, res) => {
+  const { termo } = req.params
 
-  try {
-    const tutores = await prisma.tutor.findMany({
-      where: {
-        nome: {
-          contains: nome,
-          mode: 'insensitive'
+  // tenta converter o termo em número
+  const termoNumero = Number(termo)
+
+  // se a conversão gerou um NaN (Not a Number)
+  if (isNaN(termoNumero)) {
+    try {
+      const tutores = await prisma.tutor.findMany({
+        where: {
+          OR: [
+            { nome: { contains: termo }},
+          ]
         }
-      },
-      include: {
-        pets: true,
-        consultas: true
-      }
-    })
-
-    if (tutores.length === 0) {
-      res.status(404).json({ erro: "Nenhum tutor encontrado com esse nome" })
-    } else {
+      })
       res.status(200).json(tutores)
+    } catch (error) {
+      res.status(400).json(error)
     }
-  } catch (error) {
-    res.status(400).json(error)
-  }
+  } 
 })
+
 
 export default router
