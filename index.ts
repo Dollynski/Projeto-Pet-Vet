@@ -6,6 +6,7 @@ import consultasRoutes from './routes/consultas'
 import prontuariosRoutes from './routes/prontuarios'
 import racasRoutes from './routes/racas'
 import especiesRoutes from './routes/especies'
+import dashboardRoutes from './routes/dashboard'
 import cors from 'cors'
 
 
@@ -24,6 +25,7 @@ app.use("/consultas", consultasRoutes)
 app.use("/prontuarios", prontuariosRoutes)
 app.use("/racas", racasRoutes)
 app.use("/especies", especiesRoutes)
+app.use("/dashboard", dashboardRoutes)
 
 
 app.get('/', (req, res) => {
