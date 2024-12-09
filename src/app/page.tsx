@@ -95,7 +95,7 @@ export default function Home() {
 
             <section className="container mt-24 flex flex-col">
 
-              <div className="w-3/4 flex justify-between mx-auto mb-5">
+              <div className="w-3/4 flex justify-between mx-auto mb-5 mt-32">
                 <div className="border-blue-600 border rounded p-6 w-1/3 me-3">
                   <span className="bg-blue-100 text-blue-800 text-xl text-center font-bold mx-auto block px-2.5 py-5 rounded dark:bg-blue-900 dark:text-blue-300">
                     {dados.veterinarios}
@@ -118,18 +118,22 @@ export default function Home() {
 
                 <h2 className="text-2xl font-bold mt-16 text-center">Gráfico: Nº de Consultas por Veterinário</h2>
                 <div className="p-4 rounded-lg flex justify-center">
-                <Chart
-                  chartType="AreaChart" // Ou "BarChart" para um gráfico de barras
-                  width="100%"
-                  height="280px"
-                  data={data}
-                  options={{
-                  legend: { position: "bottom", textStyle: { color: "#67AFB3" } },
-                  hAxis: { textStyle: { color: "#67AFB3" } },
-                  vAxis: { textStyle: { color: "#67AFB3" } },
-                  colors: ["#67AFB3"],
-                  }}
-                />
+                  {consultasVeterinario.length > 0 ? (
+                    <Chart
+                      chartType="AreaChart" // Ou "BarChart" para um gráfico de barras
+                      width="100%"
+                      height="280px"
+                      data={data}
+                      options={{
+                        legend: { position: "bottom", textStyle: { color: "#67AFB3" } },
+                        hAxis: { textStyle: { color: "#67AFB3" } },
+                        vAxis: { textStyle: { color: "#67AFB3" } },
+                        colors: ["#67AFB3"],
+                      }}
+                    />
+                  ) : (
+                    <p>Não há nenhuma consulta realizada no momento por você, Dr. {veterinario.nome}.</p>
+                  )}
                 </div>
             </section>
 

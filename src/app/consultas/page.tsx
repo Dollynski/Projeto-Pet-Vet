@@ -246,7 +246,7 @@ const exibirFormularioCadastroConsulta = () => {
               </td>
               <td className="px-6 py-4">
                 <p><b>{consulta.descricao}</b></p>
-                <p><i>Consultado em: {dataDMA(consulta.data)}</i></p>
+                <p><i>Consultado prevista para: {dataDMA(consulta.data)}</i></p>
               </td>
                 <td className="px-6 py-4 flex gap-2">
                 <button

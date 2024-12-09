@@ -5,11 +5,22 @@ import { PetI } from "@/utils/types/pets";
 import { useEffect, useState } from "react";
 import { Toaster } from 'sonner'
 import { useVeterinarioStore } from "@/context/veterinario";
+import Swal from 'sweetalert2';
+
 import Link from 'next/link';
 
 export default function Home() {
   const [pets, setPets] = useState<PetI[]>([])
   const { logaVeterinario } = useVeterinarioStore()
+  const handleSubmit = () => {
+    Swal.fire({
+      icon: 'success',
+      title: '<h2 style="color: #ffffff; font-size: 1.2rem;">Sucesso</h2>',
+      text: 'Relatório enviado com sucesso!',
+      confirmButtonColor: '#A4D0C3',
+      background: '#1F1F1F',
+    });
+  };
 
   useEffect(() => {
 
@@ -69,16 +80,16 @@ export default function Home() {
       <label htmlFor="destinatario" className="block text-sm font-medium text-gray-700 dark:text-gray-200">Escolha o destinatário</label>
       <select id="destinatario" name="destinatario" className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
         <option>Selecione</option>
-        <option>Dr. Fulano</option>
-        <option>Dr. Beltrano</option>
-        <option>Dr. Ciclano</option>
+        <option>Tutor X</option>
+        <option>Tutor Y</option>
+        <option>Tutor Z</option>
       </select>
     </div>
 
-    <div className="flex justify-center mt-8">
-      <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Enviar dados</button>
-    </div>
 
+    <div className="flex justify-center mt-8">
+    <button onClick={handleSubmit} className="focus:outline-none text-white bg-[#67AFB3] hover:bg-[#7dbabd] focus:ring-4 focus:ring-[#7dbabd] font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-[#67AFB3] dark:hover:bg-[#7dbabd] dark:focus:ring-[#7dbabd]">Enviar dados</button>
+    </div>
     </div>
     </main>
   );
