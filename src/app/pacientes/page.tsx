@@ -198,7 +198,31 @@ export default function Home() {
         <div className="flex items-center mb-4 justify-center mt-28">
           <div className="relative w-1/2">
             <form onSubmit={handleSubmit(enviaPesquisa)}>
-              <input type="search" id="search" className="block p-4 pl-12 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Digite aqui o nome do Tutor/Tutora do Pet" required {...register("termo")}/>
+            <div className="relative">
+  <svg
+    className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm0 0l7 7M21 21l-5-5"
+    />
+  </svg>
+  <input
+    type="search"
+    id="search"
+    className="block p-4 pl-12 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+    placeholder="Digite aqui o nome do Tutor/Tutora do Pet"
+    required
+    {...register("termo")}
+  />
+</div>
             </form>
             <div className="flex justify-center mt-4">
                 <button
