@@ -208,17 +208,17 @@ export function ItemPet({ data }: { data: PetI }) {
         
         <div className="flex justify-between items-center mt-4 gap-2">
          
-          <button
+            <button
             onClick={() => deletarPet(data.id.toString())}
-            className="p-2  hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300 dark:focus:ring-red-800"
-          >
+            className="p-1 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300 dark:focus:ring-red-800 rounded-full"
+            >
             <img className="w-5 h-5" src="./cancelar.png" alt="Ícone de Deletar" />
-          </button>
+            </button>
   
           
           <button
             onClick={() => editarPet(data.id.toString())}
-            className="p-2 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 dark:focus:ring-green-800"
+            className="p-1 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 dark:focus:ring-green-800 rounded-full"
           >
             <img className="w-5 h-5" src="./editar.png" alt="Ícone de Editar" />
           </button>
